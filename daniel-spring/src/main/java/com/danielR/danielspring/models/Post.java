@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -16,6 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Post {
     @Id
+    @GeneratedValue
     @Column(name = "post_id")
     private String id;
 
@@ -36,5 +39,8 @@ public class Post {
     private Date scrapingDate;
 
     @Column(name = "containing_bad_words")
-    private String containingBadWords;
+    private boolean containingBadWords;
+
+    @Column(name = "list_of_bad_words")
+    private ArrayList<String> listOfBadWords;
 }
