@@ -1,6 +1,5 @@
 package com.danielR.danielspring.controllers.api;
 
-import com.danielR.danielspring.models.License;
 import com.danielR.danielspring.models.Permission;
 import com.danielR.danielspring.services.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;

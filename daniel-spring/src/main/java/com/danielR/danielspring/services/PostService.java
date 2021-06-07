@@ -2,10 +2,7 @@ package com.danielR.danielspring.services;
 
 import com.danielR.danielspring.DTOs.PostDTO;
 import com.danielR.danielspring.models.Post;
-import com.danielR.danielspring.models.Suspect;
-import com.danielR.danielspring.models.Word;
 import com.danielR.danielspring.repositories.PostRepository;
-import com.danielR.danielspring.repositories.WordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
