@@ -3,7 +3,7 @@ package com.danielR.danielspring.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.danielR.danielspring.data.repositories.PersonRepository;
+import com.danielR.danielspring.data.repositories.PersonLikeRepository;
 import com.danielR.danielspring.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public interface PeopleService {
     @Service
     class PeopleServiceImp implements PeopleService{
         @Autowired
-        private PersonRepository repository;
+        private PersonLikeRepository repository;
 
         @Override
         public List<Person> findAllPeople() {

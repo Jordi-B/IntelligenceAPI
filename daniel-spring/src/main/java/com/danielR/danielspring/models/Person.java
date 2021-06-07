@@ -13,7 +13,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "persons")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Person {
     @Id
     @Column(name = "id")
