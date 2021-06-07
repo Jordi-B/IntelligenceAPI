@@ -1,8 +1,6 @@
 package com.danielR.danielspring.controllers.api;
 
 import com.danielR.danielspring.DTOs.PostDTO;
-import com.danielR.danielspring.models.Person;
-import com.danielR.danielspring.models.Post;
 import com.danielR.danielspring.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

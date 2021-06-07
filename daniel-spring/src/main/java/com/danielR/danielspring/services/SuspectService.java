@@ -1,7 +1,5 @@
 package com.danielR.danielspring.services;
 
-import com.danielR.danielspring.data.repositories.PersonLikeRepository;
-import com.danielR.danielspring.models.Person;
 import com.danielR.danielspring.models.Suspect;
 import com.danielR.danielspring.repositories.SuspectRepository;
 import org.springframework.beans.factory.annotation.Autowired;

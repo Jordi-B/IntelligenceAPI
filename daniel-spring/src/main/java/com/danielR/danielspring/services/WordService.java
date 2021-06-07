@@ -26,6 +26,8 @@ public class WordService {
             newWord.setWord(word.getWord());
             newWord.setCounter(this.getWordCounter(word.getWord()));
             newWord.setPercentageOfPosts(this.getPostPercentage(word.getWord()));
+
+            words.add(newWord);
         }
 
         return words;
@@ -34,8 +36,6 @@ public class WordService {
     public Word addWord(String newWord) {
         Word word = new Word();
         word.setWord(newWord);
-
-//        this.postService.addWordToBadWords(newWord);
 
         return this.repository.save(word);
     }
