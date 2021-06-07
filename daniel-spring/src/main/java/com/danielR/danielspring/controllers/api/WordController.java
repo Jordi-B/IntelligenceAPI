@@ -1,9 +1,11 @@
 package com.danielR.danielspring.controllers.api;
 
+import com.danielR.danielspring.models.Word;
 import com.danielR.danielspring.services.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController()
 
@@ -12,4 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class WordController {
     @Autowired
     WordService wordService;
+
+    @GetMapping("")
+    public List<Word> getAllWords() {
+        return this.wordService.findAllWords();
+    }
+
+    @GetMapping("/add/{word}")
+    public int addWord(@PathVariable("word") String word) {
+        return this.wordService.addWord(word) != null ? 200 : 401;
+    }
 }
