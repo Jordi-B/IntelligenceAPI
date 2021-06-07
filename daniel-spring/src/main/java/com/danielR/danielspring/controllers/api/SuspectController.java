@@ -33,4 +33,9 @@ public class SuspectController {
     public boolean isSuspected(@PathVariable String personId) {
         return this.suspectService.isSuspected(personId);
     }
+
+    @GetMapping("/suspect/{id}")
+    public Suspect getSuspectById(@PathVariable String id) {
+        return this.suspectService.getSuspectById(id);
+    }
 }

@@ -26,4 +26,8 @@ public class SuspectService {
         return this.repository.existsById(personId);
     }
 
+    public Suspect getSuspectById(String id) {
+        return this.repository.findByPersonId(id).orElse(null);
+    }
+
 }
