@@ -18,7 +18,7 @@ public class Word {
     @Id
     @GeneratedValue
     @Column(name = "word_id")
-    private String wordId;
+    private int wordId;
 
     @Column(name = "word")
     private String word;
