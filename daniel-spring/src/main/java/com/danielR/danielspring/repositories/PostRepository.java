@@ -10,4 +10,5 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, String> {
     List<Post> findByTextContaining(String word);
     List<Post> findAll();
+    List<Post> findByPersonId_Id(String personId);
 }
