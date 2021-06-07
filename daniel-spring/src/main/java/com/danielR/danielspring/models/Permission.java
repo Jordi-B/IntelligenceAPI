@@ -16,6 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Permission {
     @Id
+    @GeneratedValue
     @Column(name = "permission_id")
     private String id;
 
