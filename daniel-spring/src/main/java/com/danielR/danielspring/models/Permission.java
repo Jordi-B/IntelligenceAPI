@@ -18,7 +18,7 @@ public class Permission {
     @Id
     @GeneratedValue
     @Column(name = "permission_id")
-    private String id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "person_id")

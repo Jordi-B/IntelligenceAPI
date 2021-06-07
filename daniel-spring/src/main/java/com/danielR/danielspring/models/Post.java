@@ -20,7 +20,7 @@ public class Post {
     @Id
     @GeneratedValue
     @Column(name = "post_id")
-    private String id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "person_id")
