@@ -18,9 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 public class Post {
     @Id
-    @GeneratedValue
     @Column(name = "post_id")
-    private int id;
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "person_id")
@@ -29,18 +28,16 @@ public class Post {
     @Column(name = "text")
     private String text;
 
-    @Column(name = "num_of_likes")
-    private String numOfLikes;
-
     @Column(name = "publish_date")
     private Date publishDate;
 
     @Column(name = "scraping_date")
     private Date scrapingDate;
 
-    @Column(name = "containing_bad_words")
-    private boolean containingBadWords;
-
-    @Column(name = "list_of_bad_words")
-    private ArrayList<String> listOfBadWords;
+//    @Column(name = "containing_bad_words")
+//    private boolean containingBadWords;
+//
+//    @OneToMany
+//    @Column(name = "list_of_bad_words")
+//    private List<Word> listOfBadWords;
 }

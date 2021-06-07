@@ -5,8 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "words")
@@ -16,18 +18,12 @@ import java.util.List;
 @AllArgsConstructor
 public class Word {
     @Id
-    @GeneratedValue
-    @Column(name = "word_id")
-    private int wordId;
-
     @Column(name = "word")
     private String word;
-
-    @Column(name = "counter")
-    private int counter;
-
-    @Column(name = "percentage_of_posts")
-    private int percentageOfPosts;
-
-
+//
+//    @Column(name = "counter")
+//    private int counter;
+//
+//    @Column(name = "percentage_of_posts")
+//    private int percentageOfPosts;
 }
