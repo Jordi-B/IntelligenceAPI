@@ -1,5 +1,6 @@
 package com.danielR.danielspring.controllers.api;
 
+import com.danielR.danielspring.DTOs.WordDTO;
 import com.danielR.danielspring.models.Word;
 import com.danielR.danielspring.services.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class WordController {
     WordService wordService;
 
     @GetMapping("")
-    public List<Word> getAllWords() {
+    public List<WordDTO> getAllWords() {
         return this.wordService.findAllWords();
     }
 
