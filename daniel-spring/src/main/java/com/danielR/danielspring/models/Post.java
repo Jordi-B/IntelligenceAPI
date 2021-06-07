@@ -33,11 +33,4 @@ public class Post {
 
     @Column(name = "scraping_date")
     private Date scrapingDate;
-
-//    @Column(name = "containing_bad_words")
-//    private boolean containingBadWords;
-//
-//    @OneToMany
-//    @Column(name = "list_of_bad_words")
-//    private List<Word> listOfBadWords;
 }

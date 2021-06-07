@@ -1,5 +1,6 @@
 package com.danielR.danielspring.controllers.api;
 
+import com.danielR.danielspring.DTOs.PostDTO;
 import com.danielR.danielspring.models.Person;
 import com.danielR.danielspring.models.Post;
 import com.danielR.danielspring.services.PostService;
@@ -19,7 +20,7 @@ public class PostController {
     PostService postService;
 
     @GetMapping("")
-    public List<Post> getAllPosts() {
+    public List<PostDTO> getAllPosts() {
         return this.postService.findAllPosts();
     }
 }
