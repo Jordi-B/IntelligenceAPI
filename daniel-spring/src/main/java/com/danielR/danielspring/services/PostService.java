@@ -2,6 +2,7 @@ package com.danielR.danielspring.services;
 
 import com.danielR.danielspring.models.Post;
 import com.danielR.danielspring.models.Suspect;
+import com.danielR.danielspring.models.Word;
 import com.danielR.danielspring.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,9 @@ public class PostService {
         List<Post> posts = this.getPostsContainWord(word);
 
         for(Post post : posts){
-            post.getListOfBadWords().add(word);
+            ArrayList<String> words = post.getListOfBadWords();
+            words.add(word);
+            post.setListOfBadWords(words);
             this.repository.save(post);
         }
     }
