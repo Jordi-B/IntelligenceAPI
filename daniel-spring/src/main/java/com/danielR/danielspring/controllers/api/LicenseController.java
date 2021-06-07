@@ -1,15 +1,15 @@
 package com.danielR.danielspring.controllers.api;
 
-import com.danielR.danielspring.services.PostsService;
+import com.danielR.danielspring.services.LicenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController()
 
-@RequestMapping("/api/posts")
+@RequestMapping("/api/licenses")
 
-public class PostsController {
+public class LicenseController {
     @Autowired
-    PostsService postsService;
+    LicenseService licenseService;
 }
