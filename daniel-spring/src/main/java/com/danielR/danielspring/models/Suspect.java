@@ -16,9 +16,12 @@ import java.util.Date;
 @AllArgsConstructor
 public class Suspect {
     @Id
-    @OneToOne(mappedBy = "id")
-    @JoinColumn(name = "person_id")
+    @Column(name = "person_id")
     private String personId;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn(name = "person_id", referencedColumnName="id")
+    private Person person;
 
     @Column(name = "is_wanted")
     private boolean isWanted;

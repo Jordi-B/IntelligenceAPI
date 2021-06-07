@@ -16,9 +16,12 @@ import java.util.Date;
 @AllArgsConstructor
 public class License {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "license_id")
+    private String id;
+
+    @ManyToOne
     @JoinColumn(name = "person_id")
-    private String personId;
+    private Person personId;
 
     @Column(name = "starting_date")
     private Date startingDate;

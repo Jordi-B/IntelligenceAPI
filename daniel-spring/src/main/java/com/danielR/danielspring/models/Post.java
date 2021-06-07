@@ -16,9 +16,12 @@ import java.util.Date;
 @AllArgsConstructor
 public class Post {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "post_id")
+    private String id;
+
+    @ManyToOne
     @JoinColumn(name = "person_id")
-    private String personId;
+    private Person personId;
 
     @Column(name = "text")
     private String text;
