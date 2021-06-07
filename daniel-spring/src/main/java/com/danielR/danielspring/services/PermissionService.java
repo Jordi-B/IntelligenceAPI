@@ -3,5 +3,5 @@ package com.danielR.danielspring.services;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PersonsService {
+public class PermissionService {
 }

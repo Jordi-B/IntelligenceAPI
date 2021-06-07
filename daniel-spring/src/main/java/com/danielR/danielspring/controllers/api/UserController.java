@@ -1,7 +1,7 @@
 package com.danielR.danielspring.controllers.api;
 
 import com.danielR.danielspring.models.User;
-import com.danielR.danielspring.services.UsersService;
+import com.danielR.danielspring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +14,9 @@ import java.util.List;
 
 @RequestMapping("/api/users")
 
-public class UsersController {
+public class UserController {
     @Autowired
-    UsersService usersService;
+    UserService userService;
 
     @GetMapping("")
     public List<User> getAllPeople() {

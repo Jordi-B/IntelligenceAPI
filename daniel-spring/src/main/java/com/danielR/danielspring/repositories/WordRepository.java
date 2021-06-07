@@ -6,5 +6,5 @@ package com.danielR.danielspring.repositories;
         import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WordRepository extends CrudRepository<Word, String> {
+public interface WordRepository extends JpaRepository<Word, String> {
 }
