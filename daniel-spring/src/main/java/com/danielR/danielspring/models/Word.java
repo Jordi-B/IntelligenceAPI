@@ -20,10 +20,4 @@ public class Word {
     @Id
     @Column(name = "word")
     private String word;
-//
-//    @Column(name = "counter")
-//    private int counter;
-//
-//    @Column(name = "percentage_of_posts")
-//    private int percentageOfPosts;
 }
