@@ -9,5 +9,4 @@ package com.danielR.danielspring.repositories;
 @Repository
 public interface WordRepository extends JpaRepository<Word, String> {
         List<Word> findAll();
-
 }
