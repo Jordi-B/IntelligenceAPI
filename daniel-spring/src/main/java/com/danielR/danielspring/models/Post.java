@@ -40,4 +40,7 @@ public class Post {
 
     @Column(name = "list_of_bad_words")
     private ArrayList<String> listOfBadWords;
+
+    @Column(name = "containing_bad_words")
+    private boolean containingBadWords;
 }

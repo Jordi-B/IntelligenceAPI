@@ -10,5 +10,4 @@ import java.util.List;
 public interface SuspectRepository extends JpaRepository<Suspect, String> {
     List<Suspect> findAll();
     List<Suspect> findByIsWantedTrue();
-
 }
