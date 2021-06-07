@@ -16,9 +16,9 @@ import java.util.Date;
 @AllArgsConstructor
 public class License {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     @Column(name = "license_number")
-    private String licenseNumber;
+    private int licenseNumber;
 
     @ManyToOne
     @JoinColumn(name = "person_id")
