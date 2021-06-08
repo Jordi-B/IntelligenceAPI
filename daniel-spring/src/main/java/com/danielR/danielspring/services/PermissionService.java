@@ -15,4 +15,8 @@ public class PermissionService {
     public List<Permission> findAllPermissions() {
         return this.repository.findAll();
     }
+
+    public List<Permission> getAllByPersonId(String id) {
+        return this.repository.findAllByPersonId_Id(id);
+    }
 }
