@@ -29,4 +29,9 @@ public class PostController {
     public int getPostCountById(@PathVariable String id) {
         return this.postService.getPostCountForThePastWeek(id);
     }
+
+    @GetMapping("/recent")
+    public List<PostDTO> getRecentSuspectedPosts() {
+        return this.postService.getRecentSuspectedPosts();
+    }
 }
