@@ -17,7 +17,7 @@ public class PeopleApiController {
     @Autowired
     PeopleService peopleService;
 
-        @GetMapping("")
+    @GetMapping("")
     public List<Person> getAllPeople() {
         return peopleService.findAllPeople();
     }

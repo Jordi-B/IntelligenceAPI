@@ -51,8 +51,11 @@ public class WordService {
         return counter;
     }
 
-    private void addWordToPostBadWords(String word){
+    public Word deleteWord(String word){
+        Word deleteWord = this.repository.findByWord(word);
 
+        this.repository.delete(deleteWord);
+        return this.repository.findByWord(word);
     }
 
     private int getPostPercentage(String word){
