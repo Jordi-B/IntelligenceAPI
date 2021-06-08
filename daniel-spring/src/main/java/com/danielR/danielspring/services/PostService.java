@@ -95,4 +95,10 @@ public class PostService {
     public List<Post> getPostsContainWord(String word) {
         return this.repository.findByTextContaining(word);
     }
+
+    public List<Post> getRecentPostsContainWord(String word) {
+        Date lastDay = new Date();
+        lastDay.setDate(lastDay.getDate() -2);
+        return this.repository.findByTextContainingAndPublishDateAfter(word, lastDay);
+    }
 }

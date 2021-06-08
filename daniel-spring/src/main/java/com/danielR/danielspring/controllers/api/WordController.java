@@ -25,4 +25,9 @@ public class WordController {
     public int addWord(@PathVariable("word") String word) {
         return this.wordService.addWord(word) != null ? 200 : 401;
     }
+
+    @GetMapping("/recent")
+    public List<WordDTO> getRecentWords() {
+        return this.wordService.findRecentWords();
+    }
 }
