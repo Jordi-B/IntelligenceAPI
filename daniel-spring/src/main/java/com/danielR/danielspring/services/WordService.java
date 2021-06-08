@@ -33,11 +33,14 @@ public class WordService {
         return words;
     }
 
-    public Word addWord(String newWord) {
+    public int addWord(String newWord) {
+        if(this.repository.findByWord(newWord) != null){
+            return 300;
+        }
+
         Word word = new Word();
         word.setWord(newWord);
-
-        return this.repository.save(word);
+        return this.repository.save(word) != null ? 200 : 400;
     }
 
     private int getWordCounter(String word){
@@ -51,11 +54,15 @@ public class WordService {
         return counter;
     }
 
-    public Word deleteWord(String word){
-        Word deleteWord = this.repository.findByWord(word);
-
-        this.repository.delete(deleteWord);
-        return this.repository.findByWord(word);
+    public int deleteWord(String word){
+        try{
+            Word deleteWord = this.repository.findByWord(word);
+            this.repository.delete(deleteWord);
+        }
+        catch(Exception ex){
+            return 400;
+        }
+        return 200;
     }
 
     private int getPostPercentage(String word){
@@ -74,5 +81,23 @@ public class WordService {
         }
 
         return badWords;
+    }
+
+    public int replaceWord(String newWord, String word){
+        try{
+            Word deleteWord = this.repository.findByWord(word);
+            this.repository.delete(deleteWord);
+        }
+        catch(Exception ex){
+            return 400;
+        }
+
+        if(this.repository.findByWord(newWord) != null){
+            return 300;
+        }
+
+        Word addWord = new Word(newWord);
+        this.repository.save(addWord);
+        return 200;
     }
 }
