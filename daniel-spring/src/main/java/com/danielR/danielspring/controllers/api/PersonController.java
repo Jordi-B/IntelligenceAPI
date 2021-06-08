@@ -3,17 +3,14 @@ package com.danielR.danielspring.controllers.api;
 import com.danielR.danielspring.models.Person;
 import com.danielR.danielspring.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController()
 
 @RequestMapping("/api/persons")
-
+@CrossOrigin
 public class PersonController {
     @Autowired
     PersonService personService;
