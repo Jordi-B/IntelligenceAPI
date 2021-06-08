@@ -1,5 +1,6 @@
 package com.danielR.danielspring.controllers.api;
 
+import com.danielR.danielspring.DTOs.PostCounterDTO;
 import com.danielR.danielspring.DTOs.PostDTO;
 import com.danielR.danielspring.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class PostController {
     @GetMapping("/recent")
     public List<PostDTO> getRecentSuspectedPosts() {
         return this.postService.getRecentSuspectedPosts();
+    }
+
+    @GetMapping("/counts28/{id}")
+    public List<PostCounterDTO> getPostCounts(@PathVariable String id){
+        return this.postService.get28PostCounters(id);
     }
 
     @PostMapping("/addScraping")

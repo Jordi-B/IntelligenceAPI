@@ -7,9 +7,7 @@ import com.danielR.danielspring.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class PostService {
@@ -90,14 +88,27 @@ public class PostService {
         return this.repository.findByTextContainingAndPublishDateAfter(word, lastDay);
     }
 
-    public List<PostCounterDTO> get28PostCounters(){
+    public List<PostCounterDTO> get28PostCounters(String id){
         ArrayList<PostCounterDTO> postCounts  = new ArrayList<>();
         Date lastDay = new Date();
-        lastDay.setDate(lastDay.getDate() - 1);
-        for(int i = 0 ; i < 28 ; i++){
-                PostCounterDTO newPostCounter = new PostCounterDTO();
+        lastDay.setHours(0);
+        lastDay.setMinutes(0);
+        lastDay.setSeconds(0);
+        Date endLastDate = new Date(lastDay.getTime());
+        endLastDate.setDate(endLastDate.getDate() - 1);
+        Date date = new Date(lastDay.getTime());
+        PostCounterDTO newPostCounter = new PostCounterDTO();
 
-            lastDay.setDate(lastDay.getDate() - 1);
+        for(int i = 0 ; i < 28 ; i++){
+            newPostCounter.setDate(date);
+            newPostCounter.setPostCount(this.repository.countByPersonId_IdAndPublishDateBetween(id, endLastDate ,date));
+
+            postCounts.add(newPostCounter);
+
+            lastDay.setTime(endLastDate.getTime());
+            endLastDate.setDate(endLastDate.getDate() - 1);
+            newPostCounter = new PostCounterDTO();
+            date = new Date(lastDay.getTime());
         }
 
         return postCounts;
