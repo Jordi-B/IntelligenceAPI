@@ -15,4 +15,8 @@ public class UserService {
     public List<User> findAllUsers() {
         return this.repository.findAll();
     }
+
+    public  List<User> findAllManagers() {
+        return this.repository.findAllByIsManagerTrue();
+    }
 }
