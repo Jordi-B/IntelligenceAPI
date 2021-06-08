@@ -1,20 +1,18 @@
 package com.danielR.danielspring.controllers.api;
 
 
+import com.danielR.danielspring.exceptions.IdNotFoundException;
 import com.danielR.danielspring.models.Suspect;
 import com.danielR.danielspring.services.SuspectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController()
 
 @RequestMapping("/api/suspects")
-
+@CrossOrigin
 public class SuspectController {
     @Autowired
     SuspectService suspectService;
@@ -37,5 +35,15 @@ public class SuspectController {
     @GetMapping("/suspect/{id}")
     public Suspect getSuspectById(@PathVariable String id) {
         return this.suspectService.getSuspectById(id);
+    }
+
+    @PatchMapping("/suspect/set/wanted/{id}")
+    public int setSuspectAsWanted(@PathVariable String id) {
+        try {
+            this.suspectService.setSuspectAsWanted(id);
+            return 200;
+        } catch (IdNotFoundException e) {
+            return 401;
+        }
     }
 }

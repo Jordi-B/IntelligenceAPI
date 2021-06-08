@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,6 +34,30 @@ public class PostService {
         }
 
         return posts;
+    }
+
+    public List<PostDTO> getPostsByPersonId(String id) {
+        ArrayList<PostDTO> posts = new ArrayList<PostDTO>();
+
+        for(Post post : this.repository.findByPersonId_Id(id)){
+            PostDTO newPost = new PostDTO();
+            newPost.setId(post.getId());
+            newPost.setPersonId(post.getPersonId());
+            newPost.setPublishDate(post.getPublishDate());
+            newPost.setScrapingDate(post.getScrapingDate());
+            newPost.setText(post.getText());
+            newPost.setListOfBadWords(wordService.getBadWordsInPost(post.getText()));
+
+            posts.add(newPost);
+        }
+
+        return posts;
+    }
+
+    public int getPostCountForThePastWeek(String id) {
+        Date date = new Date();
+        date.setDate(date.getDate() - 7);
+        return this.repository.countByPersonId_IdAndPublishDateAfter(id, date);
     }
 
 //    public void addWordToBadWords(String word){
