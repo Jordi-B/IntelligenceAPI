@@ -19,7 +19,7 @@ public class PostService {
     private WordService wordService;
 
     public List<PostDTO> findAllPosts() {
-        ArrayList<PostDTO> posts = new ArrayList<PostDTO>();
+        ArrayList<PostDTO> posts = new ArrayList<>();
 
         for(Post post : this.repository.findAll()){
             PostDTO newPost = new PostDTO();
@@ -90,6 +90,13 @@ public class PostService {
 //            post.setListOfBadWords(words);
 //            this.repository.save(post);
 //        }
+//    }
+
+//    public List<Post> getSuspectedPosts() {
+//        ArrayList<Post> suspectedPosts = new ArrayList<>();
+//        List<Post> posts = this.repository.findAll();
+//
+//        return suspectedPosts;
 //    }
 
     public List<Post> getPostsContainWord(String word) {
