@@ -54,11 +54,32 @@ public class PostService {
         return posts;
     }
 
+    public List<PostDTO> getRecentSuspectedPosts() {
+        ArrayList<PostDTO> posts = new ArrayList<PostDTO>();
+        Date lastDay = new Date();
+        lastDay.setDate(lastDay.getDate() -2);
+        for(Post post : this.repository.findAllByPublishDateAfter(lastDay)){
+            PostDTO newPost = new PostDTO();
+            newPost.setListOfBadWords(wordService.getBadWordsInPost(post.getText()));
+            if (newPost.getListOfBadWords().size() > 0) {
+                newPost.setId(post.getId());
+                newPost.setPersonId(post.getPersonId());
+                newPost.setPublishDate(post.getPublishDate());
+                newPost.setScrapingDate(post.getScrapingDate());
+                newPost.setText(post.getText());
+                posts.add(newPost);
+            }
+        }
+        return posts;
+    }
+
     public int getPostCountForThePastWeek(String id) {
         Date date = new Date();
-        date.setDate(date.getDate() - 7);
+        date.setDate(date.getDate() - 8);
         return this.repository.countByPersonId_IdAndPublishDateAfter(id, date);
     }
+
+
 
 //    public void addWordToBadWords(String word){
 //        List<Post> posts = this.getPostsContainWord(word);
