@@ -49,33 +49,9 @@ public class WordService {
         return words;
     }
 
-    public List<WordDTO> findRecentWordsPercentage() {
-        ArrayList<WordDTO> words = new ArrayList<>();
 
-        for(Word word : this.repository.findAll()){
-            WordDTO newWord = new WordDTO();
-            newWord.setWord(word.getWord());
-            newWord.setCounter(this.getRecentWordPercentageCounter(word.getWord()));
-            newWord.setPercentageOfPosts(this.getRecentPostPercentage(word.getWord()));
 
-            words.add(newWord);
-        }
 
-        return words;
-    }
-
-    private int getRecentWordPercentageCounter(String word) {
-        List<Post> posts = this.postService.getRecentPostsContainWord(word);
-        int counter = 0;
-
-        for(Post post : posts){
-            if (post.getText().contains(word)) {
-                counter++;
-            }
-        }
-
-        return counter;
-    }
 
     public int addWord(String newWord) {
         if(this.repository.findByWord(newWord) != null){

@@ -23,6 +23,7 @@ public class UserService {
 
     public List<User> findAllNonManagers() {
         return this.repository.findAllByIsManagerFalse();
+    }
 
     public String checkUser(String username, String password){
         if(this.repository.findUserByUsername(username) == null){
