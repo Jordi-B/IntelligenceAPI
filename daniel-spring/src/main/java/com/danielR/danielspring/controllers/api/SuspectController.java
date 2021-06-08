@@ -62,4 +62,9 @@ public class SuspectController {
     public List<Suspect> getNewWanted() {
         return this.suspectService.getNewWanteds();
     }
+
+    @GetMapping("released/new")
+    public List<Suspect> getNewReleased() {
+        return this.suspectService.getNewReleased();
+    }
 }
