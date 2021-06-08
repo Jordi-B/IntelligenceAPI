@@ -1,5 +1,6 @@
 package com.danielR.danielspring.services;
 
+import com.danielR.danielspring.exceptions.IdNotFoundException;
 import com.danielR.danielspring.models.Suspect;
 import com.danielR.danielspring.repositories.SuspectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,12 @@ public class SuspectService {
 
     public Suspect getSuspectById(String id) {
         return this.repository.findByPersonId(id).orElse(null);
+    }
+
+    public void setSuspectAsWanted(String id) throws IdNotFoundException{
+        Suspect suspect = this.repository.findByPersonId(id).orElseThrow(IdNotFoundException::new);
+        suspect.setWanted(true);
+        this.repository.save(suspect);
     }
 
 }
