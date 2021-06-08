@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController()
 
@@ -21,13 +22,19 @@ public class WordController {
         return this.wordService.findAllWords();
     }
 
-    @GetMapping("/delete/{word}")
-    public int deleteWord(@PathVariable("word") String word) {
-        return this.wordService.deleteWord(word) == null ? 200 : 401;
+    @DeleteMapping("")
+    public int deleteWord(@RequestBody Map<String, String> json) {
+        return this.wordService.deleteWord(json.get("word"));
     }
 
-    @GetMapping("/add")
-    public int addWord(@RequestBody String word) {
-        return this.wordService.addWord(word) != null ? 200 : 401;
+    @PostMapping("/add")
+    public int addWord(@RequestBody Map<String, String> json) {
+        return this.wordService.addWord(json.get("word"));
     }
+
+    @PostMapping("/replace")
+    public int replaceWord(@RequestBody Map<String, String> json) {
+        return this.wordService.replaceWord(json.get("addWord"), json.get("deleteWord"));
+    }
+
 }
