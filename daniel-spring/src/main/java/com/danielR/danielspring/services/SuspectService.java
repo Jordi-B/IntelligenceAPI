@@ -6,6 +6,7 @@ import com.danielR.danielspring.repositories.SuspectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,6 +33,7 @@ public class SuspectService {
     public void setSuspectAsWanted(String id) throws IdNotFoundException{
         Suspect suspect = this.repository.findByPersonId(id).orElseThrow(IdNotFoundException::new);
         suspect.setWanted(true);
+        suspect.setStarted(new Date());
         this.repository.save(suspect);
     }
 
