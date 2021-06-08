@@ -16,6 +16,15 @@ public class UserService {
         return this.repository.findAll();
     }
 
+
+    public  List<User> findAllManagers() {
+        return this.repository.findAllByIsManagerTrue();
+    }
+
+    public List<User> findAllNonManagers() {
+        return this.repository.findAllByIsManagerFalse();
+    }
+
     public String checkUser(String username, String password){
         if(this.repository.findUserByUsername(username) == null){
             return "Username does not exist";

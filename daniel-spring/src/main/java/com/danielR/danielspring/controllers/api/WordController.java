@@ -32,6 +32,11 @@ public class WordController {
         return this.wordService.findRecentWords();
     }
 
+    @GetMapping("/recent/percentages")
+    public List<WordDTO> getRecentWordsPercentages() {
+        return this.wordService.findRecentWordsPercentage();
+    }
+
     @PostMapping("/add")
     public int addWord(@RequestBody Map<String, String> json) {
         return this.wordService.addWord(json.get("word"));
@@ -40,10 +45,5 @@ public class WordController {
     @PostMapping("/replace")
     public int replaceWord(@RequestBody Map<String, String> json) {
         return this.wordService.replaceWord(json.get("addWord"), json.get("deleteWord"));
-    }
-
-    @GetMapping("/recent/percentages")
-    public List<WordDTO> getRecentWordsPercentages() {
-        return this.wordService.findRecentWordsPercentage();
     }
 }

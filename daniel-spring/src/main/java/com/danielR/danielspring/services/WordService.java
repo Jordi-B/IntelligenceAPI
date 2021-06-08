@@ -49,6 +49,10 @@ public class WordService {
         return words;
     }
 
+
+
+
+
     public int addWord(String newWord) {
         if(this.repository.findByWord(newWord) != null){
             return 300;
