@@ -38,8 +38,8 @@ public class SuspectController {
         return this.suspectService.getSuspectById(id);
     }
 
-    @PatchMapping("/suspect/toggle/wanted/{id}")
-    public int setSuspectAsWanted(@PathVariable String id) {
+    @PatchMapping("/suspect/toggle/wanted")
+    public int setSuspectAsWanted(@RequestBody String id) {
         try {
             this.suspectService.setSuspectAsWanted(id);
             return 200;
