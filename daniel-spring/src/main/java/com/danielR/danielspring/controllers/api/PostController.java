@@ -34,4 +34,9 @@ public class PostController {
     public List<PostDTO> getRecentSuspectedPosts() {
         return this.postService.getRecentSuspectedPosts();
     }
+
+    @PostMapping("/addScraping")
+    public int addPostsFromScraping() {
+        return 200;
+    }
 }
