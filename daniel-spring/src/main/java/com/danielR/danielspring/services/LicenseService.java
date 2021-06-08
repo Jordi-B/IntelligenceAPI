@@ -15,4 +15,8 @@ public class LicenseService {
     public List<License> findAllLicenses() {
         return this.repository.findAll();
     }
+
+    public List<License> getAllByPersonId(String id) {
+        return this.repository.findAllByPersonId_Id(id);
+    }
 }
