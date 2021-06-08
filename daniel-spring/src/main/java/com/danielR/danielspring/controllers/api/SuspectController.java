@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController()
 
@@ -39,9 +40,9 @@ public class SuspectController {
     }
 
     @PatchMapping("/suspect/toggle/wanted")
-    public int setSuspectAsWanted(@RequestBody String id) {
+    public int setSuspectAsWanted(@RequestBody Map<String, String> json) {
         try {
-            this.suspectService.setSuspectAsWanted(id);
+            this.suspectService.setSuspectAsWanted(json.get("id"));
             return 200;
         } catch (IdNotFoundException e) {
             return 401;
