@@ -41,4 +41,9 @@ public class WordController {
     public int replaceWord(@RequestBody Map<String, String> json) {
         return this.wordService.replaceWord(json.get("addWord"), json.get("deleteWord"));
     }
+
+    @GetMapping("/recent/percentages")
+    public List<WordDTO> getRecentWordsPercentages() {
+        return this.wordService.findRecentWordsPercentage();
+    }
 }
