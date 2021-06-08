@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, String> {
     List<Post> findByTextContaining(String word);
+    List<Post> findByTextContainingAndPublishDateAfter(String word, Date publishDate);
     List<Post> findAll();
     List<Post> findByPersonId_Id(String personId);
     int countByPersonId_IdAndPublishDateAfter(String personId, Date publishDate);
