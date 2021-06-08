@@ -33,6 +33,22 @@ public class WordService {
         return words;
     }
 
+
+    public List<WordDTO> findRecentWords() {
+        ArrayList<WordDTO> words = new ArrayList<>();
+
+        for(Word word : this.repository.findAll()){
+            WordDTO newWord = new WordDTO();
+            newWord.setWord(word.getWord());
+            newWord.setCounter(this.getRecentWordCounter(word.getWord()));
+            newWord.setPercentageOfPosts(this.getRecentPostPercentage(word.getWord()));
+
+            words.add(newWord);
+        }
+
+        return words;
+    }
+
     public int addWord(String newWord) {
         if(this.repository.findByWord(newWord) != null){
             return 300;
@@ -48,7 +64,24 @@ public class WordService {
         int counter = 0;
 
         for(Post post : posts){
-            counter += post.getText().split(word).length - 1;
+            counter += post.getText().split(word).length;
+            if (!post.getText().endsWith(word)) {
+                counter--;
+            }
+        }
+
+        return counter;
+    }
+
+    private int getRecentWordCounter(String word){
+        List<Post> posts = this.postService.getRecentPostsContainWord(word);
+        int counter = 0;
+
+        for(Post post : posts){
+            counter += post.getText().split(word).length;
+            if (!post.getText().endsWith(word)) {
+                counter--;
+            }
         }
 
         return counter;
@@ -67,6 +100,11 @@ public class WordService {
 
     private int getPostPercentage(String word){
         return (int)(((float)this.postService.getPostsContainWord(word).size()) /
+                ((float)this.postService.findAllPosts().size()) * 100);
+    }
+
+    private int getRecentPostPercentage(String word) {
+        return (int)(((float)this.postService.getRecentPostsContainWord(word).size()) /
                 ((float)this.postService.findAllPosts().size()) * 100);
     }
 

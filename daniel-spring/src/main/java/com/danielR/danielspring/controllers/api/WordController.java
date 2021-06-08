@@ -27,6 +27,11 @@ public class WordController {
         return this.wordService.deleteWord(json.get("word"));
     }
 
+    @GetMapping("/recent")
+    public List<WordDTO> getRecentWords() {
+        return this.wordService.findRecentWords();
+    }
+
     @PostMapping("/add")
     public int addWord(@RequestBody Map<String, String> json) {
         return this.wordService.addWord(json.get("word"));
@@ -36,5 +41,4 @@ public class WordController {
     public int replaceWord(@RequestBody Map<String, String> json) {
         return this.wordService.replaceWord(json.get("addWord"), json.get("deleteWord"));
     }
-
 }
