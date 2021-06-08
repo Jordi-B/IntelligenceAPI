@@ -38,7 +38,7 @@ public class SuspectController {
         return this.suspectService.getSuspectById(id);
     }
 
-    @PatchMapping("/suspect/set/wanted/{id}")
+    @PatchMapping("/suspect/toggle/wanted/{id}")
     public int setSuspectAsWanted(@PathVariable String id) {
         try {
             this.suspectService.setSuspectAsWanted(id);
@@ -51,5 +51,15 @@ public class SuspectController {
     @GetMapping("/full")
     public List<SuspectDTO> getSuspectDTOs() {
         return this.suspectService.getSuspectListWithBadWords();
+    }
+
+    @GetMapping("/new")
+    public List<Suspect> getNewSuspects() {
+        return this.suspectService.getNewSuspects();
+    }
+
+    @GetMapping("/wanted/new")
+    public List<Suspect> getNewWanted() {
+        return this.suspectService.getNewWanteds();
     }
 }

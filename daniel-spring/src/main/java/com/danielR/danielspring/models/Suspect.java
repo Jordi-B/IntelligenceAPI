@@ -28,4 +28,7 @@ public class Suspect {
 
     @Column(name = "started")
     private Date started;
+
+    @Column(name = "was_wanted")
+    private boolean wasWanted;
 }

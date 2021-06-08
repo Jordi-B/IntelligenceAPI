@@ -42,7 +42,10 @@ public class SuspectService {
 
     public void setSuspectAsWanted(String id) throws IdNotFoundException{
         Suspect suspect = this.repository.findByPersonId(id).orElseThrow(IdNotFoundException::new);
-        suspect.setWanted(true);
+        suspect.setWanted(!suspect.isWanted());
+        if (suspect.isWanted()) {
+            suspect.setWasWanted(true);
+        }
         suspect.setStarted(new Date());
         this.repository.save(suspect);
     }
@@ -65,6 +68,22 @@ public class SuspectService {
         return newSuspectList;
     }
 
+    public List<Suspect> getNewSuspects() {
+        Date lastDay = new Date();
+        lastDay.setDate(lastDay.getDate() -2);
+        return this.repository.findAllByStartedAfter(lastDay);
+    }
 
+    public List<Suspect> getNewWanteds() {
+        Date lastDay = new Date();
+        lastDay.setDate(lastDay.getDate() -2);
+        return this.repository.findAllByStartedAfterAndIsWantedTrue(lastDay);
+    }
+
+    public List<Suspect> getNewReleased() {
+        Date lastDay = new Date();
+        lastDay.setDate(lastDay.getDate() -2);
+        return this.repository.findAllByStartedAfterAndIsWantedFalseAndWasWantedTrue(lastDay);
+    }
 
 }
