@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -51,6 +52,12 @@ public class PostService {
         }
 
         return posts;
+    }
+
+    public int getPostCountForThePastWeek(String id) {
+        Date date = new Date();
+        date.setDate(date.getDate() - 7);
+        return this.repository.countByPersonId_IdAndPublishDateAfter(id, date);
     }
 
 //    public void addWordToBadWords(String word){

@@ -27,4 +27,9 @@ public class PostController {
     public List<PostDTO> getPostsByPersonId(@PathVariable String id) {
         return this.postService.getPostsByPersonId(id);
     }
+
+    @GetMapping("/person/count/{id}")
+    public int getPostCountById(@PathVariable String id) {
+        return this.postService.getPostCountForThePastWeek(id);
+    }
 }
