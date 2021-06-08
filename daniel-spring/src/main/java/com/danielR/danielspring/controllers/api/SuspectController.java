@@ -24,7 +24,7 @@ public class SuspectController {
         return this.suspectService.findAllSuspects();
     }
 
-    @GetMapping("/wanteds")
+    @GetMapping("/wanted")
     public List<Suspect> getAllWanteds() {
         return this.suspectService.findAllWanteds();
     }

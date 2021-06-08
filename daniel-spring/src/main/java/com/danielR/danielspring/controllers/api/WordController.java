@@ -21,8 +21,13 @@ public class WordController {
         return this.wordService.findAllWords();
     }
 
-    @GetMapping("/add/{word}")
-    public int addWord(@PathVariable("word") String word) {
+    @GetMapping("/delete/{word}")
+    public int deleteWord(@PathVariable("word") String word) {
+        return this.wordService.deleteWord(word) == null ? 200 : 401;
+    }
+
+    @GetMapping("/add")
+    public int addWord(@RequestBody String word) {
         return this.wordService.addWord(word) != null ? 200 : 401;
     }
 }
