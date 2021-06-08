@@ -1,6 +1,7 @@
 package com.danielR.danielspring.controllers.api;
 
 
+import com.danielR.danielspring.DTOs.SuspectDTO;
 import com.danielR.danielspring.exceptions.IdNotFoundException;
 import com.danielR.danielspring.models.Suspect;
 import com.danielR.danielspring.services.SuspectService;
@@ -45,5 +46,10 @@ public class SuspectController {
         } catch (IdNotFoundException e) {
             return 401;
         }
+    }
+
+    @GetMapping("/full")
+    public List<SuspectDTO> getSuspectDTOs() {
+        return this.suspectService.getSuspectListWithBadWords();
     }
 }
