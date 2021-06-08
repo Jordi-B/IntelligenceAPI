@@ -16,7 +16,11 @@ public class UserService {
         return this.repository.findAll();
     }
 
-//    public  List<User> findAllManagers() {
-//        return this.repository.findAllByIsManagerTrue();
-//    }
+    public  List<User> findAllManagers() {
+        return this.repository.findAllByIsManagerTrue();
+    }
+
+    public List<User> findAllNonManagers() {
+        return this.repository.findAllByIsManagerFalse();
+    }
 }

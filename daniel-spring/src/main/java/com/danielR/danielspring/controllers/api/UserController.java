@@ -24,9 +24,14 @@ public class UserController {
         return this.userService.findAllUsers();
     }
 
-//    @GetMapping("/managers")
-//    public List<User> getManagers() {
-//        return this.userService.findAllManagers();
-//    }
+    @GetMapping("/managers")
+    public List<User> getManagers() {
+        return this.userService.findAllManagers();
+    }
+
+    @GetMapping("/managers/false")
+    public List<User> getNonManagers() {
+        return this.userService.findAllNonManagers();
+    }
 
 }
