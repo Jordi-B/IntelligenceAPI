@@ -1,6 +1,7 @@
 package com.danielR.danielspring.controllers.api;
 
 import com.danielR.danielspring.DTOs.PostDTO;
+import com.danielR.danielspring.scrapeObjects.scrapeProfile;
 import com.danielR.danielspring.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class PostController {
     }
 
     @PostMapping("/addScraping")
-    public int addPostsFromScraping() {
+    public int addPostsFromScraping(@RequestBody scrapeProfile[] scrapeData) {
         return 200;
     }
 }
