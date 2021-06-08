@@ -12,7 +12,7 @@ import java.util.List;
 @RestController()
 
 @RequestMapping("/api/suspects")
-
+@CrossOrigin
 public class SuspectController {
     @Autowired
     SuspectService suspectService;
