@@ -22,6 +22,16 @@ public class UserController {
         return this.userService.findAllUsers();
     }
 
+    @GetMapping("/managers")
+    public List<User> getManagers() {
+        return this.userService.findAllManagers();
+    }
+
+    @GetMapping("/managers/false")
+    public List<User> getNonManagers() {
+        return this.userService.findAllNonManagers();
+    }
+
     @PostMapping("/check")
     public String checkUser(@RequestBody Map<String, String> json) {
         return this.userService.checkUser(json.get("username"), json.get("password"));
