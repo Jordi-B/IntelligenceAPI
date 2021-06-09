@@ -55,6 +55,10 @@ public class UserController {
     }
 
 
+    @GetMapping("/me")
+    public User getMe(@RequestHeader String token) {
+        return this.userService.getUserById(Integer.valueOf(this.jwtTokenUtil.getIdFromToken(token)));
+    }
 
 
 }

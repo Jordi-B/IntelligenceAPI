@@ -51,7 +51,7 @@ public class UserService {
         return this.repository.save(user) != null ? "Sign in successfully" : "Something went wrong";
     }
 
-    public User getUserById(String id) {
+    public User getUserById(int id) {
         return this.repository.findById(id).get();
     }
 }
