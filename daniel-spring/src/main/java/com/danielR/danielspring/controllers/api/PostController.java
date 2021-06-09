@@ -1,10 +1,13 @@
 package com.danielR.danielspring.controllers.api;
 
+import com.danielR.danielspring.DTOs.PostCounterDTO;
 import com.danielR.danielspring.DTOs.PostDTO;
 import com.danielR.danielspring.services.PostService;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController()
@@ -33,6 +36,12 @@ public class PostController {
     @GetMapping("/recent")
     public List<PostDTO> getRecentSuspectedPosts() {
         return this.postService.getRecentSuspectedPosts();
+    }
+
+    @GetMapping("/counts28/{id}")
+    public List<PostCounterDTO> getPostCounts(@PathVariable String id){
+        List<PostCounterDTO> p = this.postService.get28PostCounters(id);
+        return p;
     }
 
     @PostMapping("/addScraping")
