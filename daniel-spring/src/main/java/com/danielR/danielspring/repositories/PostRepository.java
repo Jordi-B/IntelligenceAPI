@@ -15,4 +15,7 @@ public interface PostRepository extends JpaRepository<Post, String> {
     List<Post> findByPersonId_Id(String personId);
     int countByPersonId_IdAndPublishDateAfter(String personId, Date publishDate);
     List<Post> findAllByPublishDateAfter(Date publishDate);
+    int countByPersonId_IdAndPublishDateBetween(String personId, Date publishDate, Date afterDay);
+    int countByPersonId_IdAndPublishDate(String personId, Date publishDate);
+
 }

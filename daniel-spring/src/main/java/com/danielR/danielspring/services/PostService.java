@@ -1,5 +1,6 @@
 package com.danielR.danielspring.services;
 
+import com.danielR.danielspring.DTOs.PostCounterDTO;
 import com.danielR.danielspring.DTOs.PostDTO;
 import com.danielR.danielspring.models.Person;
 import com.danielR.danielspring.models.Post;
@@ -8,12 +9,12 @@ import com.danielR.danielspring.scrapeObjects.scrapeData;
 import com.danielR.danielspring.scrapeObjects.scrapeProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.*;
 
 @Service
 public class PostService {
@@ -89,26 +90,6 @@ public class PostService {
         return this.repository.countByPersonId_IdAndPublishDateAfter(id, date);
     }
 
-
-
-//    public void addWordToBadWords(String word){
-//        List<Post> posts = this.getPostsContainWord(word);
-//
-//        for(Post post : posts){
-//            ArrayList<Word> words = post.getListOfBadWords();
-//            words.add(word);
-//            post.setListOfBadWords(words);
-//            this.repository.save(post);
-//        }
-//    }
-
-//    public List<Post> getSuspectedPosts() {
-//        ArrayList<Post> suspectedPosts = new ArrayList<>();
-//        List<Post> posts = this.repository.findAll();
-//
-//        return suspectedPosts;
-//    }
-
     public List<Post> getPostsContainWord(String word) {
         return this.repository.findByTextContaining(word);
     }
@@ -159,5 +140,36 @@ public class PostService {
         }
 
         return isPostInList;
+    }
+  
+    public List<PostCounterDTO> get28PostCounters(String id){
+        ArrayList<PostCounterDTO> postCounts  = new ArrayList<>();
+        Date lastDay = new Date();
+
+        lastDay.setHours(0);
+        lastDay.setMinutes(0);
+        lastDay.setSeconds(0);
+        Date endLastDate = new Date(lastDay.getTime());
+        endLastDate.setDate(endLastDate.getDate() - 1);
+        Date date = new Date(lastDay.getTime());
+        PostCounterDTO newPostCounter = new PostCounterDTO();
+
+        for(int i = 0 ; i < 28 ; i++){
+            newPostCounter.setDate(date);
+            newPostCounter.setPostCount(this.repository.countByPersonId_IdAndPublishDateBetween(id, endLastDate ,date));
+
+            postCounts.add(newPostCounter);
+
+            lastDay.setTime(endLastDate.getTime());
+            endLastDate.setDate(endLastDate.getDate() - 1);
+            newPostCounter = new PostCounterDTO();
+            date = new Date(lastDay.getTime());
+        }
+
+        for(PostCounterDTO post : postCounts){
+            post.getDate().setDate(post.getDate().getDate() + 1);
+        }
+
+        return postCounts;
     }
 }
