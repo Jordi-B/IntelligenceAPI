@@ -124,19 +124,26 @@ public class PostService {
 
         for(scrapeProfile curScrapeProfile : scrapeProfiles){
             Person curPerson = personService.getPersonById(curScrapeProfile.getPerson_id());
-            List<Post> curProfilePosts = new ArrayList<>(this.repository.findByPersonId_Id(curScrapeProfile.getPerson_id()));
 
-            for(scrapeData curScrapeData : curScrapeProfile.getData()){
-                Post newPost = new Post();
-                newPost.setPersonId(curPerson);
-                newPost.setText(curScrapeData.getText());
-                newPost.setPublishDate(postDateFormat.parse(curScrapeData.getPublish_date()));
-                newPost.setScrapingDate(postDateFormat.parse(curScrapeData.getScraping_date()));
+            if(curPerson != null){
+                List<Post> curProfilePosts = new ArrayList<>(this.repository.findByPersonId_Id(curScrapeProfile.getPerson_id()));
 
-                if(!isPostInList(curProfilePosts, newPost)){
-                    postsToAdd.add(newPost);
+                for(scrapeData curScrapeData : curScrapeProfile.getData()){
+                    Post newPost = new Post();
+                    newPost.setPersonId(curPerson);
+                    newPost.setText(curScrapeData.getText());
+                    newPost.setPublishDate(postDateFormat.parse(curScrapeData.getPublish_date()));
+                    newPost.setScrapingDate(postDateFormat.parse(curScrapeData.getScraping_date()));
+
+                    if(!isPostInList(curProfilePosts, newPost)){
+                        postsToAdd.add(newPost);
+                    }
                 }
             }
+        }
+
+        for(Post curPost : postsToAdd){
+            this.repository.save(curPost);
         }
     }
 
