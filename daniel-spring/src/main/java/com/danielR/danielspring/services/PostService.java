@@ -113,8 +113,10 @@ public class PostService {
                     Post newPost = new Post();
                     newPost.setPersonId(curPerson);
                     newPost.setText(curScrapeData.getText());
-                    newPost.setPublishDate(postDateFormat.parse(curScrapeData.getPublish_date()));
-                    newPost.setScrapingDate(postDateFormat.parse(curScrapeData.getScraping_date()));
+                    newPost.setPublishDate(curScrapeData.getPublish_date() != null ?
+                            postDateFormat.parse(curScrapeData.getPublish_date()) : null);
+                    newPost.setScrapingDate(curScrapeData.getScraping_date() != null ?
+                            postDateFormat.parse(curScrapeData.getScraping_date()) : null);
 
                     if(!isPostInList(curProfilePosts, newPost)){
                         this.repository.save(newPost);
@@ -133,9 +135,17 @@ public class PostService {
         for(Post curPost : postList) {
             if (curPost.getPersonId().equals(queryPost.getPersonId())
                     && curPost.getText().equals(queryPost.getText())
-                    && new Date(curPost.getPublishDate().getTime()).equals(queryPost.getPublishDate())) {
-                isPostInList = true;
-                break;
+                   ) {
+                if(curPost.getPublishDate() == null){
+
+                    if(queryPost.getPublishDate() == null){
+                        isPostInList = true;
+                    }
+                } else {
+                    if(new Date(curPost.getPublishDate().getTime()).equals(queryPost.getPublishDate())) {
+                        isPostInList = true;
+                    }
+                }
             }
         }
 
