@@ -1,5 +1,6 @@
 package com.danielR.danielspring.services;
 
+import com.danielR.danielspring.exceptions.IdNotFoundException;
 import com.danielR.danielspring.models.User;
 import com.danielR.danielspring.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,15 @@ public class UserService {
         return this.repository.save(user) != null ? "Sign in successfully" : "Something went wrong";
     }
 
-    public User getUserById(String id) {
+    public User getUserById(int id) {
         return this.repository.findById(id).get();
+    }
+
+    public void deleteUser(User toDelete, String username, String password) throws IdNotFoundException {
+        if (toDelete.getUserId() == this.findUserByUserNameAndPassword(username, password).getUserId()) {
+            this.repository.delete(toDelete);
+        } else {
+            throw new IdNotFoundException();
+        }
     }
 }

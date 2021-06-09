@@ -55,6 +55,21 @@ public class UserController {
     }
 
 
+    @GetMapping("/me")
+    public User getMe(@RequestHeader String token) {
+        return this.userService.getUserById(Integer.valueOf(this.jwtTokenUtil.getIdFromToken(token)));
+    }
 
+    @DeleteMapping("")
+    public int deleteUser(@RequestHeader String token, @RequestBody Map<String, String> json) {
+        try {
+            this.userService.deleteUser(this.userService.getUserById(
+                    Integer.valueOf(this.jwtTokenUtil.getIdFromToken(token))),
+                    json.get("username"), json.get("password"));
+            return 200;
+        } catch (Exception e) {
+            return 401;
+        }
+    }
 
 }
