@@ -1,16 +1,16 @@
 package com.danielR.danielspring.controllers.api;
 
 import com.danielR.danielspring.DTOs.PostDTO;
-import com.danielR.danielspring.scrapeObjects.scrapeProfile;
 import com.danielR.danielspring.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController()
 
-@RequestMapping("/api/posts")
+@RequestMapping(value = "/api/posts", method = {RequestMethod.GET, RequestMethod.POST})
 @CrossOrigin
 public class PostController {
     @Autowired
@@ -37,7 +37,7 @@ public class PostController {
     }
 
     @PostMapping("/addScraping")
-    public int addPostsFromScraping(@RequestBody scrapeProfile[] scrapeData) {
-        return 200;
+    public void addPostsFromScraping(HttpServletResponse response) {
+        response.setStatus(200);
     }
 }
