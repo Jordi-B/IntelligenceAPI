@@ -16,7 +16,9 @@ public class UserService {
         return this.repository.findAll();
     }
 
-
+    public User findUserByUserNameAndPassword(String username, String password) {
+        return this.repository.findUserByUsernameAndPassword(username, password);
+    }
     public  List<User> findAllManagers() {
         return this.repository.findAllByIsManagerTrue();
     }
@@ -47,5 +49,9 @@ public class UserService {
         user.setUsername(username);
 
         return this.repository.save(user) != null ? "Sign in successfully" : "Something went wrong";
+    }
+
+    public User getUserById(String id) {
+        return this.repository.findById(id).get();
     }
 }
