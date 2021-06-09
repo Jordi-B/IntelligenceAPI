@@ -1,5 +1,7 @@
 package com.danielR.danielspring.controllers.api;
 
+import com.danielR.danielspring.jwt.JwtResponse;
+import com.danielR.danielspring.jwt.JwtTokenUtil;
 import com.danielR.danielspring.models.User;
 import com.danielR.danielspring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ import java.util.Map;
 public class UserController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
 
     @GetMapping("")
     public List<User> getAllUsers() {
@@ -41,4 +46,15 @@ public class UserController {
     public String addWord(@RequestBody Map<String, String> json) {
         return this.userService.addUser(json.get("username"), json.get("password"));
     }
+
+    @PostMapping("/login")
+    public JwtResponse login(@RequestBody Map<String, String> json) {
+        User user = this.userService.findUserByUserNameAndPassword(json.get("username"), json.get("password"));
+        String token = this.jwtTokenUtil.generateToken(user);
+        return new JwtResponse(token, user.getUsername(), user.isManager());
+    }
+
+
+
+
 }

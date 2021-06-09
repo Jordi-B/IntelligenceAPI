@@ -15,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostDTO {
-    private String id;
+    private int id;
     private Person personId;
     private String text;
     private Date publishDate;
