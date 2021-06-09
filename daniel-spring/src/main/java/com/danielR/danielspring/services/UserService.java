@@ -52,15 +52,37 @@ public class UserService {
         return this.repository.save(user) != null ? "Sign in successfully" : "Something went wrong";
     }
 
+    public String addManager(User user, String username, String password) {
+        if(this.repository.findUserByUsername(username) != null){
+            return "Username already exists";
+        }
+
+        if (!user.isManager()) {
+            return "Unauthorized";
+        }
+
+
+
+        User newUser = new User();
+        newUser.setManager(true);
+        newUser.setPassword(password);
+        newUser.setUsername(username);
+
+        return this.repository.save(newUser) != null ? "Sign in successfully" : "Something went wrong";
+    }
+
     public User getUserById(int id) {
         return this.repository.findById(id).get();
     }
 
-    public void deleteUser(User toDelete, String username, String password) throws IdNotFoundException {
-        if (toDelete.getUserId() == this.findUserByUserNameAndPassword(username, password).getUserId()) {
-            this.repository.delete(toDelete);
+    public String deleteUser(User deleting, String username) throws IdNotFoundException {
+        if (deleting.isManager()) {
+            this.repository.delete(this.repository.findAllByUsername(username).get(0));
+            return "done";
         } else {
-            throw new IdNotFoundException();
+            return "Unauthorized";
         }
     }
+
+
 }

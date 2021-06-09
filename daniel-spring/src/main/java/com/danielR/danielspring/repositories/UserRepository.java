@@ -9,8 +9,10 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findAll();
+    List<User> findAllByUsername(String username);
     List<User> findAllByIsManagerTrue();
     List<User> findAllByIsManagerFalse();
     User findUserByUsernameAndPassword(String username, String password);
     User findUserByUsername(String username);
+    void deleteUserByUsername(String username);
 }

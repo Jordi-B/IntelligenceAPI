@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public String addWord(@RequestBody Map<String, String> json) {
+    public String addUser(@RequestBody Map<String, String> json) {
         return this.userService.addUser(json.get("username"), json.get("password"));
     }
 
@@ -60,15 +60,21 @@ public class UserController {
         return this.userService.getUserById(Integer.valueOf(this.jwtTokenUtil.getIdFromToken(token)));
     }
 
+    @PostMapping("/add/manager")
+    public String addManager(@RequestHeader String token, @RequestBody Map<String, String> json) {
+        return this.userService.addManager(this.userService.getUserById(Integer.valueOf(this.jwtTokenUtil.getIdFromToken(token))), json.get("username"), json.get("password"));
+    }
+
     @DeleteMapping("")
     public int deleteUser(@RequestHeader String token, @RequestBody Map<String, String> json) {
         try {
             this.userService.deleteUser(this.userService.getUserById(
                     Integer.valueOf(this.jwtTokenUtil.getIdFromToken(token))),
-                    json.get("username"), json.get("password"));
+                    json.get("username"));
             return 200;
         } catch (Exception e) {
-            return 401;
+            System.out.println(e.getMessage());
+         return 401;
         }
     }
 
