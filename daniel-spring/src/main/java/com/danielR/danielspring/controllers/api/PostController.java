@@ -3,11 +3,13 @@ package com.danielR.danielspring.controllers.api;
 import com.danielR.danielspring.DTOs.PostCounterDTO;
 import com.danielR.danielspring.DTOs.PostDTO;
 import com.danielR.danielspring.services.PostService;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.danielR.danielspring.scrapeObjects.scrapeProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.List;
 
 @RestController()
@@ -45,7 +47,11 @@ public class PostController {
     }
 
     @PostMapping("/addScraping")
-    public int addPostsFromScraping() {
-        return 200;
+    public void addPostsFromScraping(@RequestBody List<scrapeProfile> scrapeProfiles ,HttpServletResponse response) {
+        try {
+            response.setStatus(postService.addPostsFromScraping(scrapeProfiles) ? 201 : 202); ;
+        } catch (ParseException e) {
+            response.setStatus(400);
+        }
     }
 }
