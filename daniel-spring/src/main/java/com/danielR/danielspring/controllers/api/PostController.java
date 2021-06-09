@@ -41,7 +41,7 @@ public class PostController {
     @PostMapping("/addScraping")
     public void addPostsFromScraping(@RequestBody List<scrapeProfile> scrapeProfiles ,HttpServletResponse response) {
         try {
-            postService.addPostsFromScraping(scrapeProfiles);
+            response.setStatus(postService.addPostsFromScraping(scrapeProfiles) ? 201 : 202); ;
         } catch (ParseException e) {
             response.setStatus(400);
         }

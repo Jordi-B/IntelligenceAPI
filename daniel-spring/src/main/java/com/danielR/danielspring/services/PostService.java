@@ -119,8 +119,9 @@ public class PostService {
         return this.repository.findByTextContainingAndPublishDateAfter(word, lastDay);
     }
 
-    public void addPostsFromScraping(List<scrapeProfile> scrapeProfiles) throws ParseException {
+    public boolean addPostsFromScraping(List<scrapeProfile> scrapeProfiles) throws ParseException {
         List<Post> postsToAdd = new ArrayList<>();
+        boolean newPostsAdded = false;
 
         for(scrapeProfile curScrapeProfile : scrapeProfiles){
             Person curPerson = personService.getPersonById(curScrapeProfile.getPerson_id());
@@ -136,15 +137,14 @@ public class PostService {
                     newPost.setScrapingDate(postDateFormat.parse(curScrapeData.getScraping_date()));
 
                     if(!isPostInList(curProfilePosts, newPost)){
-                        postsToAdd.add(newPost);
+                        this.repository.save(newPost);
+                        newPostsAdded = true;
                     }
                 }
             }
         }
 
-        for(Post curPost : postsToAdd){
-            this.repository.save(curPost);
-        }
+        return newPostsAdded;
     }
 
     public boolean isPostInList(List<Post> postList, Post queryPost){
