@@ -120,7 +120,6 @@ public class PostService {
     }
 
     public boolean addPostsFromScraping(List<scrapeProfile> scrapeProfiles) throws ParseException {
-        List<Post> postsToAdd = new ArrayList<>();
         boolean newPostsAdded = false;
 
         for(scrapeProfile curScrapeProfile : scrapeProfiles){
