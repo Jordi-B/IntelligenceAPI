@@ -91,6 +91,7 @@ public class PostService {
     public List<PostCounterDTO> get28PostCounters(String id){
         ArrayList<PostCounterDTO> postCounts  = new ArrayList<>();
         Date lastDay = new Date();
+
         lastDay.setHours(0);
         lastDay.setMinutes(0);
         lastDay.setSeconds(0);
@@ -109,6 +110,10 @@ public class PostService {
             endLastDate.setDate(endLastDate.getDate() - 1);
             newPostCounter = new PostCounterDTO();
             date = new Date(lastDay.getTime());
+        }
+
+        for(PostCounterDTO post : postCounts){
+            post.getDate().setDate(post.getDate().getDate() + 1);
         }
 
         return postCounts;
