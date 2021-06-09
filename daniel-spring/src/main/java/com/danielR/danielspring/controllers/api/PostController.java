@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController()
@@ -39,6 +40,10 @@ public class PostController {
 
     @PostMapping("/addScraping")
     public void addPostsFromScraping(@RequestBody List<scrapeProfile> scrapeProfiles ,HttpServletResponse response) {
-        response.setStatus(200);
+        try {
+            postService.addPostsFromScraping(scrapeProfiles);
+        } catch (ParseException e) {
+            response.setStatus(400);
+        }
     }
 }
