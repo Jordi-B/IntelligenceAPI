@@ -152,8 +152,7 @@ public class PostService {
         for(Post curPost : postList) {
             if (curPost.getPersonId().equals(queryPost.getPersonId())
                     && curPost.getText().equals(queryPost.getText())
-                    && curPost.getPublishDate().equals(queryPost.getPublishDate())
-                    && curPost.getScrapingDate().equals(queryPost.getScrapingDate())) {
+                    && new Date(curPost.getPublishDate().getTime()).equals(queryPost.getPublishDate())) {
                 isPostInList = true;
                 break;
             }
